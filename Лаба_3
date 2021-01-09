@@ -1,5 +1,5 @@
 import csv
-import os			#для паузы после отладки
+import os			# для паузы после отладки
 class ded_moroz:
     def __init__(self,time,time_stekloduv,time_hudojnyk,time_upakovshik): # объявляем инициализирующий метод с параметрами
         self.tm=time             # Время на изготовление игрушки
@@ -39,15 +39,34 @@ class ded_moroz:
                 self.data_csv_list.append(row)
             print(self.data_csv_list)
 
+    def write_csv_v1(self, filename):
+        fieldnames = []
+        for data in self.data_csv_dict:
+            for field in data:
+                fieldnames.append(field)
+
+        with open(filename, 'w') as file:
+            writer = csv.DictWriter(file, delimiter=';', fieldnames=fieldnames)
+            writer.writeheader()
+            for row in self.data_csv_dict:
+                writer.writerow(row)
+
+    def write_csv_v2(self, filename):
+        with open(filename, 'w') as file:
+            writer = csv.writer(file, delimiter=';')
+            for row in self.data_csv_list:
+                writer.writerow(row)
 
 a1 = ded_moroz(45,15,20,10)
-a1.read_csv_v1('3_лаба_1.csv')
-a1.read_csv_v2('3_лаба_1.csv')
-
+a1.read_csv_v1('3_laba_1.csv')
+a1.read_csv_v2('3_laba_1.csv')
+a1.write_csv_v1('m1_save1.csv')
+a1.write_csv_v2('m1_save2.csv')
 a2 = ded_moroz(75,25,15,20)
-a2.read_csv_v1('3_лаба_2.csv')  
-a2.read_csv_v2('3_лаба_2.csv')
-
+a2.read_csv_v1('3_laba_2.csv')  
+a2.read_csv_v2('3_laba_2.csv')
+a2.write_csv_v2('m2_save1.csv')
+a2.write_csv_v1('m2_save2.csv')
 
 print(" Дед Мороз ежедневно делает игрушки в подарок детям на Новый Год")
 a1 = ded_moroz(45,15,20,10)          # Объявляем наследника класса с параметрами
