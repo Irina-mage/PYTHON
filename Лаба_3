@@ -1,0 +1,60 @@
+import csv
+import os			#для паузы после отладки
+class ded_moroz:
+    def __init__(self,time,time_stekloduv,time_hudojnyk,time_upakovshik): # объявляем инициализирующий метод с параметрами
+        self.tm=time             # Время на изготовление игрушки
+        self.ts=time_stekloduv   # Время в роли стеклодува
+        self.th=time_hudojnyk    # Время в роли художника
+        self.tu=time_upakovshik  # Время в роли упаковщика
+        self.data_csv_dict = []
+        self.data_csv_list = []
+
+    def display_info(self):      # объявляем информационный метод
+        print("Время изготовления игрушки:",self.tm)
+        print("Время в роли стеклодува:",self.ts)
+        print("Время в роли художника :",self.th)
+        print("Время в роли упаковщика:",self.tu)
+
+    def kpd(self):                   # объявляем метод подсчёта изготавливаемых игрушек за день
+        self.kpd= (60*8) // self.tm  # считаем максимальное количество изготавливааемых игрушек в день
+        return "\n Количество игрушек, изготавлеваемых за %s минут в день - %s шт." % (self.tm,self.kpd)# возвращаем значение с текстом
+    def times(self):            # объявляем метод подсчёта времени на изготовление игрушек
+        self.kpd= (60*8) // self.tm  # считаем максимальное количество изготавливааемых игрушек в день
+        self.ts=self.ts*self.kpd     # Затраты времени в роли Стеклодува
+        self.th=self.th*self.kpd     # Затраты времени в роли Художника
+        self.tu=self.tu*self.kpd     # Затраты времени в роли Упаковщика
+        return "\n Затраты времени в роли Стеклодува %s минут. \n Затраты времени в роли Художника  %s минут. \n Затраты времени в роли Упаковщика %s минут." % (self.ts,self.th,self.tu)
+
+    def read_csv_v1(self, filename):
+        with open(filename) as file:
+            reader = csv.DictReader(file, delimiter=';')
+            for row in reader:
+                self.data_csv_dict.append(row)
+            print(self.data_csv_dict)
+
+    def read_csv_v2(self, filename):
+        with open(filename) as file:
+            reader = csv.reader(file, delimiter=';')
+            for row in reader:
+                self.data_csv_list.append(row)
+            print(self.data_csv_list)
+
+
+a1 = ded_moroz(45,15,20,10)
+a1.read_csv_v1('3_лаба_1.csv')
+a1.read_csv_v2('3_лаба_1.csv')
+
+a2 = ded_moroz(75,25,15,20)
+a2.read_csv_v1('3_лаба_2.csv')  
+a2.read_csv_v2('3_лаба_2.csv')
+
+
+print(" Дед Мороз ежедневно делает игрушки в подарок детям на Новый Год")
+a1 = ded_moroz(45,15,20,10)          # Объявляем наследника класса с параметрами
+print (a1.kpd())                     # Обращаемся к методу подсчёта изготавливаемых игрушек за день
+print (a1.times())              # Обращаемся к методу подсчёта времени на изготовление игрушек
+a2 = ded_moroz(75,25,15,20)
+print (a2.kpd())
+print (a2.times())
+print ()                             # Отступ
+os.system("pause")					 # пауза после отладки
