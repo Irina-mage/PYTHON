@@ -72,6 +72,10 @@ cursor.execute(sql)
 conn.commit()
 print(cursor.fetchmany(1)) #берём не более 1 первых записей
 
+sqlupdate="""UPDATE Moroz SET time = '50', time_stekloduv = '20', time_hudojnyk = '20', time_upakovshik = '10' WHERE name = 'Posle Avtomatization' """
+cursor.execute(sqlupdate)
+conn.commit()
+
 a1 = ded_moroz(45,15,20,10)
 a1.read_csv_v1('3_laba_1.csv')
 a1.read_csv_v2('3_laba_1.csv')
