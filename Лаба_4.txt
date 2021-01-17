@@ -72,6 +72,10 @@ cursor.execute(sql)
 conn.commit()
 print(cursor.fetchmany(1)) #берём не более 1 первых записей
 
+sqldelete="""DELETE FROM Moroz WHERE name = 'Pered Avtomatization' """
+cursor.execute(sqldelete)
+conn.commit()
+
 sqlupdate="""UPDATE Moroz SET time = '50', time_stekloduv = '20', time_hudojnyk = '20', time_upakovshik = '10' WHERE name = 'Posle Avtomatization' """
 cursor.execute(sqlupdate)
 conn.commit()
