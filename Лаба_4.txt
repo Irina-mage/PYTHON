@@ -62,6 +62,11 @@ class ded_moroz:
             for row in self.data_csv_list:
                 writer.writerow(row)
 
+print ("Начальнные значения:\n")
+cursor.execute("""CREATE TABLE Moroz (name text, time integer, time_stekloduv integer, time_hudojnyk integer, time_upakovshik integer) """)
+Moroz = [('Pered Avtomatization', '45','15','20','10'),('Posle Avtomatization','25','10','10','5')]
+cursor.executemany("INSERT INTO Moroz VALUES (?,?,?,?,?)", Moroz)
+
 a1 = ded_moroz(45,15,20,10)
 a1.read_csv_v1('3_laba_1.csv')
 a1.read_csv_v2('3_laba_1.csv')
