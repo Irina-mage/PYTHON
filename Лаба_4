@@ -62,6 +62,7 @@ class ded_moroz:
             for row in self.data_csv_list:
                 writer.writerow(row)
 
+
 print ("Начальнные значения:\n")
 cursor.execute("""CREATE TABLE Moroz (name text, time integer, time_stekloduv integer, time_hudojnyk integer, time_upakovshik integer) """)
 Moroz = [('Pered Avtomatization', '45','15','20','10'),('Posle Avtomatization','25','10','10','5')]
@@ -76,9 +77,22 @@ sqldelete="""DELETE FROM Moroz WHERE name = 'Pered Avtomatization' """
 cursor.execute(sqldelete)
 conn.commit()
 
+sql = "SELECT * FROM Moroz"
+cursor.execute(sql)
+conn.commit()
+print(cursor.fetchall())
+print ("\n\nНачальнное значение после UPDATE:\n")
+
 sqlupdate="""UPDATE Moroz SET time = '50', time_stekloduv = '20', time_hudojnyk = '20', time_upakovshik = '10' WHERE name = 'Posle Avtomatization' """
 cursor.execute(sqlupdate)
 conn.commit()
+
+sql = "SELECT * FROM Moroz"
+cursor.execute(sql)
+conn.commit()
+print(cursor.fetchall())
+
+print ("\n\nМетоды считывания и записи:\n")
 
 a1 = ded_moroz(45,15,20,10)
 a1.read_csv_v1('3_laba_1.csv')
