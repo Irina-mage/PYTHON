@@ -67,6 +67,11 @@ cursor.execute("""CREATE TABLE Moroz (name text, time integer, time_stekloduv in
 Moroz = [('Pered Avtomatization', '45','15','20','10'),('Posle Avtomatization','25','10','10','5')]
 cursor.executemany("INSERT INTO Moroz VALUES (?,?,?,?,?)", Moroz)
 
+sql = "SELECT * FROM Moroz"
+cursor.execute(sql)
+conn.commit()
+print(cursor.fetchmany(1)) #берём не более 1 первых записей
+
 a1 = ded_moroz(45,15,20,10)
 a1.read_csv_v1('3_laba_1.csv')
 a1.read_csv_v2('3_laba_1.csv')
